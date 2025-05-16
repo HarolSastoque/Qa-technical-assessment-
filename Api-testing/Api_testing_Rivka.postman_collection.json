@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "f67fc1e7-3a9a-4710-aece-50370222666b",
+		"name": "Api_testing_Rivka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44573076",
+		"_collection_link": "https://harol-9882969.postman.co/workspace/Postman_Rivka~6b0fc766-cd33-46b4-b28c-24717be99da0/collection/44573076-f67fc1e7-3a9a-4710-aece-50370222666b?action=share&source=collection_link&creator=44573076"
+	},
+	"item": [
+		{
+			"name": "https://jsonplaceholder.typicode.com/users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar código de estado\r",
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar al menos un email válido\r",
+							"pm.test(\"At least one user has valid email\", function() {\r",
+							"    const users = pm.response.json();\r",
+							"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+							"    let validEmailFound = false;\r",
+							"    \r",
+							"    users.forEach(user => {\r",
+							"        if(emailRegex.test(user.email)) {\r",
+							"            validEmailFound = true;\r",
+							"        }\r",
+							"    });\r",
+							"    \r",
+							"    pm.expect(validEmailFound).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
